@@ -4,6 +4,7 @@ body {
     font-family: Impact, Charcoal, sans-serif;
     font-size: 1.5em;
     background: #000;
+    position: relative;
 }
 
 button {

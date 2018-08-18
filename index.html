@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="description" content="Explore">
+        <meta name="keywords" content="sololearn explore responsive cross-platform">
+        <meta name="author" content="Isaiah Nixon - https://www.sololearn.com/Profile/3352597">
+        <meta name="copyright" content="Isaiah Nixon">
+        <meta name="date" content="2018-08-05" scheme="YYYY-MM-DD">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Explore</title>
+    </head>
+    <body>
+        <intro>
+            <h1>Explore</h1>
+            <p>Objective: Get to the lower right-hand corner of the map.</p>
+            <ul>Keep in mind:
+                <li>Blocks slow you down.</li>
+                <li>Flashing circles kill you.</li>
+                <li>You are being timed.</li>
+            </ul>
+            <button touchStart="onStart()" onClick="onStart()">Start</button>
+        </intro>
+        <map>
+            <counter></counter>
+            <player></player>
+        </map>
+        <outro>
+            <p>You <status></status>!</p>
+            <p>Time: <counter></counter></p>
+            <button touchStart="onLoad()" onClick="onLoad()">Restart</button>
+        </outro>
+    </body>
+    <footer>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="explore.js"></script>
+    </footer>
+</html>

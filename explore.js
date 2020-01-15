@@ -64,6 +64,18 @@ function onStart() {
     intro.style.visibility = 'hidden';
     outro.style.visibility = 'hidden';
     map.style.visibility = 'visible';
+
+    // Request fullscreen
+    if (map.requestFullscreen) {
+        map.requestFullscreen();
+    } else if (map.mozRequestFullScreen) { /* Firefox */
+        map.mozRequestFullScreen();
+    } else if (map.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+    map.webkitRequestFullscreen();
+    } else if (map.msRequestFullscreen) { /* IE/Edge */
+        map.msRequestFullscreen();
+    }
+    
     
     // Update positions
     document.documentElement.scrollTop = 0;

@@ -66,14 +66,14 @@ function onStart() {
     map.style.visibility = 'visible';
 
     // Request fullscreen
-    if (map.requestFullscreen) {
-        map.requestFullscreen();
-    } else if (map.mozRequestFullScreen) { /* Firefox */
-        map.mozRequestFullScreen();
-    } else if (map.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-    map.webkitRequestFullscreen();
-    } else if (map.msRequestFullscreen) { /* IE/Edge */
-        map.msRequestFullscreen();
+    if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) { /* Firefox */
+        document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+        document.documentElement.webkitRequestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) { /* IE/Edge */
+        document.documentElement.msRequestFullscreen();
     }
     
     

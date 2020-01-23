@@ -307,11 +307,11 @@ function followMouse() {
 function vibrate() {
     // If not already vibrating, vibrate for 200ms.
     if (vibrating == 0) {
-        window.navigator.vibrate(200);
+        window.navigator.vibrate(100, 30, 250);
         vibrating = 1;
         setTimeout( function() {
             vibrating = 0;
-        }, 400);
+        }, 600);
     }
     
 }

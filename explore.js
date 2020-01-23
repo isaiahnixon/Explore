@@ -18,6 +18,7 @@ var player_1_offset;
 var player_1_size;
 var map_width;
 var map_height;
+var vibrating = 0;
 
 // Interval variables
 var mouseInterval;
@@ -244,6 +245,7 @@ function followMouse() {
             break;
         case 'obstacle':
             divisor = 70;
+            vibrate();
             break;
         default:
             divisor = 10
@@ -299,6 +301,19 @@ function followMouse() {
 
     player_1.style.top = player_1_pos.y - player_1_offset + 'px';
     player_1.style.left = player_1_pos.x - player_1_offset + 'px';
+}
+
+// Vibrate the device (if available at a steady pulse)
+function vibrate() {
+    // If not already vibrating, vibrate for 200ms.
+    if (vibrating == 0) {
+        window.navigator.vibrate(200);
+        vibrating = 1;
+        setTimeout( function() {
+            vibrating = 0;
+        }, 400);
+    }
+    
 }
 
 // A function to see what player_1 is currently colliding with.

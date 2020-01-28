@@ -1,9 +1,18 @@
+:root {
+  --purple: #bd00ff;
+  --green: #00ff9f;
+  --blue: #001eff;
+  --light-blue: #00b8ff;
+  --orange: #ff9f00;
+  --black: #000;
+}
+
 body {
     overflow: hidden;
-    color: #00ff9f;
+    color: var(--green);
     font-family: Impact, Charcoal, sans-serif;
     font-size: 1.5em;
-    background: #000;
+    background: var(--black);
     position: relative;
 }
 
@@ -11,11 +20,11 @@ button {
     font-family:  inherit;
     font-size: inherit;
     color:  inherit;
-    background:  #000;
+    background:  var(--black);
     padding: 0.25em;
     left: 5%;
     position:  relative;
-    border: 3px solid #bd00ff;
+    border: 3px solid var(--purple);
     z-index: 30;
 }
 
@@ -45,7 +54,7 @@ li {
 
 li::before {
   content: "> ";
-  color: #d600ff;
+  color: var(--purple);
 }
 
 label {
@@ -55,21 +64,20 @@ label {
 }
 
 player {
-    max-width: 2.5em;
-    max-height: 2.5em;
-    border: 3px solid #00ff9f;
-    background: #001eff;
+    --player-size: min(2.5em, 10vw);
+    width: var(--player-size);
+    height: var(--player-size);
+    border: 3px solid var(--green);
+    background: var(--blue);
     position: absolute;
-    height: 10vw;
-    width: 10vw;
     z-index: 20;
 }
 
 @keyframes flicker {
-    0%    {background-color: #00ff9f;}
-    33%   {background-color: #9f00ff;}
-    67%   {background-color: #ff9f00;}
-    100%  {background-color: #00ff9f;}
+    0%    {background-color: var(--green);}
+    33%   {background-color: var(--purple);}
+    67%   {background-color: var(--orange);}
+    100%  {background-color: var(--green);}
 }
 
 opponent {
@@ -85,12 +93,12 @@ opponent {
 objective {
     position: absolute;
     z-index: 22;
-    background-color: #00b8ff;
+    background-color: var(--light-blue);
 }
 
 obstacle {
     position: absolute;
-    background: #bd00ff;
+    background: var(--purple);
     z-index: 10;
 }
 
@@ -101,7 +109,7 @@ intro {
     left: 0;
     z-index: 0;
     position: fixed;
-    background: #000;
+    background: var(--black);
 }
 
 outro {
@@ -111,7 +119,7 @@ outro {
     left: 0;
     z-index: 0;
     position: fixed;
-    background: #000;
+    background: var(--black);
 }
 
 map {
@@ -119,7 +127,7 @@ map {
     left: 0;
     z-index: 0;
     position: absolute;
-    background: #000;
+    background: var(--black);
     /* background-image: url('map.jpg'); */
 }
 

@@ -283,6 +283,23 @@ function followMouse() {
     var playerNewTop = player_1_pos.y + playerDistY;
     var playerNewLeft = player_1_pos.x + playerDistX;
 
+    var direction = 'forward';
+
+    if (Math.abs((mouse.y - player_1_pos.y)) < Math.abs((mouse.x - player_1_pos.x))) {
+        // This is flipped on purpose.
+        // The player object is "facing" the opposite direction of the user.
+        // All directions are based on the player's position, not the user's.
+        if (mouse.x < player_1_pos.x) {
+            direction = 'right';
+        } else {
+            direction = 'left';
+        }
+    } else {
+        if (mouse.y < player_1_pos.y) {
+            direction = 'backward';
+        }
+    }
+
     if (playerNewTop <= playerMinTop) {
         player_1_pos.y = playerMinTop;
     } else if (playerNewTop >= playerMaxTop) {
@@ -301,6 +318,8 @@ function followMouse() {
 
     player_1.style.top = player_1_pos.y - player_1_offset + 'px';
     player_1.style.left = player_1_pos.x - player_1_offset + 'px';
+    player_1.setAttribute('direction', direction);
+
 }
 
 // Vibrate the device (if available at a steady pulse)

@@ -5,6 +5,13 @@
   --light-blue: #00b8ff;
   --orange: #ff9f00;
   --black: #000;
+  --player-width: min(3em, 10vw);
+  --player-height: min(6em, 20vw);
+  --head-size: var(--player-width);
+  --body-width: calc(var(--player-width) / 2);
+  --body-height: calc(var(--body-width) + 0.5em);
+  --arm-size: calc(var(--body-width) / 2);
+  --leg-size: var(--arm-size);
 }
 
 body {
@@ -64,13 +71,57 @@ label {
 }
 
 player {
-    --player-size: min(2.5em, 10vw);
-    width: var(--player-size);
-    height: var(--player-size);
-    border: 3px solid var(--green);
-    background: var(--blue);
+    width: var(--player-width);
+    height: var(--player-height);
     position: absolute;
     z-index: 20;
+}
+
+player * {
+  position: inherit;
+  background: var(--blue);
+}
+
+player .head {
+  width: var(--head-size);
+  height: var(--head-size);
+  border-radius: var(--head-size);
+}
+
+player .body {
+  width: var(--body-width);
+  height: var(--body-height);
+  margin-left: calc(var(--player-width) / 4);
+  margin-top: calc(var(--head-size) - 0.5em);
+}
+
+player .arm.right {
+  width: var(--arm-size);
+  height: var(--arm-size);
+  margin-left: calc(var(--player-width) / 8);
+  margin-top: calc(var(--head-size));
+}
+
+player .arm.left {
+  width: var(--arm-size);
+  height: var(--arm-size);
+  margin-left: calc(var(--player-width) * 5/8);
+  margin-top: calc(var(--head-size));
+}
+
+
+player .leg.left {
+  width: var(--leg-size);
+  height: var(--leg-size);
+  margin-left: calc(var(--player-width) * 9/16);
+  margin-top: calc(var(--head-size) + var(--body-height) - 0.5em);
+}
+
+player .leg.right {
+  width: var(--leg-size);
+  height: var(--leg-size);
+  margin-left: calc(var(--player-width) * 3/16);
+  margin-top: calc(var(--head-size) + var(--body-height) - 0.5em);
 }
 
 @keyframes flicker {

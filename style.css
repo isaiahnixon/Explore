@@ -124,6 +124,52 @@ player .leg.right {
   margin-top: calc(var(--head-size) + var(--body-height) - 0.5em);
 }
 
+player[direction='right'] .arm.right {
+  display:  none;
+}
+
+player[direction='right'] .arm.left {
+  margin-left: calc(var(--player-width) * 3/8);
+  box-shadow: 0rem 0.5rem 0.3rem -0.2rem rgba(0, 0, 0, 0.25);
+  border: 0.1rem solid rgba(0, 0, 0, 0.25);
+}
+
+player[direction='right'] .leg.left {
+  margin-left: calc(var(--player-width) * 2/8);
+  box-shadow: 0.5rem 0rem 0.3rem -0.2rem rgba(0, 0, 0, 0.25);
+  border-right: 0.1rem solid rgba(0, 0, 0, 0.25);
+}
+
+player[direction='right'] .leg.right {
+  height: calc(var(--leg-size) * 0.8);
+  margin-left: calc(var(--player-width) * 4/8);
+  border-top: 0.1rem solid rgba(0, 0, 0, 0.25);
+  z-index: -1;
+}
+
+player[direction='left'] .arm.left {
+  display:  none;
+}
+
+player[direction='left'] .arm.right {
+  margin-left: calc(var(--player-width) * 3/8);
+  box-shadow: 0rem 0.5rem 0.3rem -0.2rem rgba(0, 0, 0, 0.25);
+  border: 0.1rem solid rgba(0, 0, 0, 0.25);
+}
+
+player[direction='left'] .leg.right {
+  margin-left: calc(var(--player-width) * 4/8);
+  box-shadow: -0.5rem 0rem 0.3rem -0.2rem rgba(0, 0, 0, 0.25);
+  border-left: 0.1rem solid rgba(0, 0, 0, 0.25);
+}
+
+player[direction='left'] .leg.left {
+  height: calc(var(--leg-size) * 0.8);
+  margin-left: calc(var(--player-width) * 2/8);
+  border-top: 0.1rem solid rgba(0, 0, 0, 0.25);
+  z-index: -1;
+}
+
 @keyframes flicker {
     0%    {background-color: var(--green);}
     33%   {background-color: var(--purple);}

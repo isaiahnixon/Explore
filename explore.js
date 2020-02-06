@@ -257,8 +257,8 @@ function followMouse() {
     var scrollDistX = (mouse.x - midX) / divisor;
     var scrollDistY = (mouse.y - midY) / divisor;
 
-    var playerDistX = (mouse.x - player_1_pos.x) / divisor;
-    var playerDistY = (mouse.y - player_1_pos.y) / divisor;
+    var playerDistX = mouse.x - player_1_pos.x;
+    var playerDistY = mouse.y - player_1_pos.y;
 
     var scrollMinTop = 0;
     var scrollMinLeft = 0;
@@ -280,22 +280,24 @@ function followMouse() {
     var playerMinLeft = player_1_offset;
     var playerMaxLeft = map_width - player_1_offset * 2;
     var playerMaxTop = map_height - player_1_offset * 2;
-    var playerNewTop = player_1_pos.y + playerDistY;
-    var playerNewLeft = player_1_pos.x + playerDistX;
+    var playerNewTop = player_1_pos.y + (playerDistY / divisor);
+    var playerNewLeft = player_1_pos.x + (playerDistX / divisor);
 
     var direction = 'forward';
 
-    if (Math.abs((mouse.y - player_1_pos.y)) < Math.abs((mouse.x - player_1_pos.x))) {
+    if (Math.abs(playerDistY) < Math.abs(playerDistX)) {
         // This is flipped on purpose.
         // The player object is "facing" the opposite direction of the user.
         // All directions are based on the player's position, not the user's.
-        if (mouse.x < player_1_pos.x) {
-            direction = 'right';
-        } else {
-            direction = 'left';
+        if (Math.abs(playerDistX) > player_1.getBoundingClientRect().width) {
+            if (mouse.x < player_1_pos.x) {
+                direction = 'right';
+            } else {
+                direction = 'left';
+            }
         }
     } else {
-        if (mouse.y < player_1_pos.y) {
+        if (mouse.y < player_1_pos.y && Math.abs(playerDistY) > player_1.getBoundingClientRect().height) {
             direction = 'backward';
         }
     }

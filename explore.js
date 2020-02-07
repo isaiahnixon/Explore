@@ -2,27 +2,27 @@
 document.addEventListener('DOMContentLoaded', onLoad);
 
 // Object variables
-var player_1;
-var opponent;
-var statuses;
+let player_1;
+let opponent;
+let statuses;
 
 // Global variables
-var intro;
-var outro;
-var map;
-var difficulty;
-var last_touch;
-var player_1_pos = { x:0, y:0 };
-var mouse = { x:0, y:0 };
-var player_1_offset;
-var player_1_size;
-var map_width;
-var map_height;
-var vibrating = 0;
+let intro;
+let outro;
+let map;
+let difficulty;
+let last_touch;
+let player_1_pos = { x:0, y:0 };
+let mouse = { x:0, y:0 };
+let player_1_offset;
+let player_1_size;
+let map_width;
+let map_height;
+let vibrating = 0;
 
 // Interval variables
-var mouseInterval;
-var counterInterval;
+let mouseInterval;
+let counterInterval;
 
 // Handles the initial game load
 function onLoad() {
@@ -81,8 +81,8 @@ function onStart() {
     // Update positions
     document.documentElement.scrollTop = 0;
     document.documentElement.scrollLeft = 0;
-    var midX = window.pageXOffset + (window.innerWidth / 2);
-    var midY = window.pageYOffset + (window.innerHeight / 2);
+    const midX = window.pageXOffset + (window.innerWidth / 2);
+    const midY = window.pageYOffset + (window.innerHeight / 2);
     player_1_pos.x = midX;
     player_1_pos.y = midY;
     mouse.x = midX;
@@ -154,17 +154,17 @@ function onEnd(status) {
 // Create the map
 function createMapArray(size) {
     // Initialize the array
-    var map_array = []
+    let map_array = []
 
     // Meta data.
     map_array['size'] = size;
 
     // Fill the array.
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         map_array[i] = [];
 
-        for (var f = 0; f < size; f++) {
-            var rand = Math.random();
+        for (let f = 0; f < size; f++) {
+            const rand = Math.random();
             if (rand > 0.95) {
                 map_array[i].push("O");
             } else if (rand > 0.65) {
@@ -195,17 +195,17 @@ function createMapArray(size) {
 // Turn the map into objects
 function renderMap(map_array) {
     // Size the map
-    var map_size = 1000;
-    var grid_size = 1000 / map_array['size'];
+    const map_size = 1000;
+    const grid_size = 1000 / map_array['size'];
 
 
     map.style.height = map_size + 'vw';
     map.style.width = map_size + 'vw';
 
     // Render the map
-    for (var i = 0; i < map_array.length; i++) {
-        for (var j = 0; j < map_array[i].length; j++) {
-            var object = map_array[i][j];
+    for (let i = 0; i < map_array.length; i++) {
+        for (let j = 0; j < map_array[i].length; j++) {
+            const object = map_array[i][j];
             if (object == "X") {
                 create('obstacle', j * grid_size + 'vw', i * grid_size + 'vw', grid_size + 'vw');
             } else if (object == "O") {
@@ -220,7 +220,7 @@ function renderMap(map_array) {
 // Updates global mouse variable based upon event attributes
 function getMouse(e) {
     if(e.type == 'touchstart' || e.type == 'touchmove' || e.type == 'touchend' || e.type == 'touchcancel'){
-        var touch = e.touches[0] || e.changedTouches[0];
+        const touch = e.touches[0] || e.changedTouches[0];
         mouse.x = touch.pageX;
         mouse.y = touch.pageY - 64;
     } else if (e.type == 'mousedown' || e.type == 'mouseup' || e.type == 'mousemove' || e.type == 'mouseover'|| e.type=='mouseout' || e.type=='mouseenter' || e.type=='mouseleave') {
@@ -231,8 +231,8 @@ function getMouse(e) {
 
 // Updates the position of player_1 based upon the global mouse variable
 function followMouse() {
-    var divisor;
-    var collision = collisionCheck();
+    let divisor;
+    const collision = collisionCheck();
 
     switch (collision) {
         case 'objective':
@@ -251,21 +251,21 @@ function followMouse() {
             divisor = 10
     }
 
-    var midX = window.pageXOffset + (window.innerWidth / 2);
-    var midY = window.pageYOffset + (window.innerHeight / 2);
+    const midX = window.pageXOffset + (window.innerWidth / 2);
+    const midY = window.pageYOffset + (window.innerHeight / 2);
 
-    var scrollDistX = (mouse.x - midX) / divisor;
-    var scrollDistY = (mouse.y - midY) / divisor;
+    const scrollDistX = (mouse.x - midX) / divisor;
+    const scrollDistY = (mouse.y - midY) / divisor;
 
-    var playerDistX = mouse.x - player_1_pos.x;
-    var playerDistY = mouse.y - player_1_pos.y;
+    const playerDistX = mouse.x - player_1_pos.x;
+    const playerDistY = mouse.y - player_1_pos.y;
 
-    var scrollMinTop = 0;
-    var scrollMinLeft = 0;
-    var scrollMaxLeft = map_width - window.innerWidth;
-    var scrollMaxTop = map_height - window.innerHeight;
-    var scrollNewTop = document.documentElement.scrollTop + scrollDistY;
-    var scrollNewLeft = document.documentElement.scrollLeft + scrollDistX;
+    const scrollMinTop = 0;
+    const scrollMinLeft = 0;
+    const scrollMaxLeft = map_width - window.innerWidth;
+    const scrollMaxTop = map_height - window.innerHeight;
+    const scrollNewTop = document.documentElement.scrollTop + scrollDistY;
+    const scrollNewLeft = document.documentElement.scrollLeft + scrollDistX;
 
     if (scrollNewTop > scrollMinTop  && scrollNewTop < scrollMaxTop) {
         mouse.y += scrollDistY;
@@ -276,14 +276,14 @@ function followMouse() {
         document.documentElement.scrollLeft = scrollNewLeft;
     }
 
-    var playerMinTop = player_1_offset;
-    var playerMinLeft = player_1_offset;
-    var playerMaxLeft = map_width - player_1_offset * 2;
-    var playerMaxTop = map_height - player_1_offset * 2;
-    var playerNewTop = player_1_pos.y + (playerDistY / divisor);
-    var playerNewLeft = player_1_pos.x + (playerDistX / divisor);
+    const playerMinTop = player_1_offset;
+    const playerMinLeft = player_1_offset;
+    const playerMaxLeft = map_width - player_1_offset * 2;
+    const playerMaxTop = map_height - player_1_offset * 2;
+    const playerNewTop = player_1_pos.y + (playerDistY / divisor);
+    const playerNewLeft = player_1_pos.x + (playerDistX / divisor);
 
-    var direction = 'forward';
+    let direction = 'forward';
 
     if (Math.abs(playerDistY) < Math.abs(playerDistX)) {
         // This is flipped on purpose.
@@ -339,27 +339,27 @@ function vibrate() {
 
 // A function to see what player_1 is currently colliding with.
 function collisionCheck() {
-    var objectives = document.getElementsByTagName('objective');
+    const objectives = document.getElementsByTagName('objective');
 
-    for (var i = objectives.length - 1; i >= 0; i--) {
+    for (let i = objectives.length - 1; i >= 0; i--) {
         if (RectRectColliding(player_1, objectives[i])) {
             return 'objective';
         }
     }
 
     // Check collision with opponents.
-    var opponents = document.getElementsByTagName('opponent');
+    const opponents = document.getElementsByTagName('opponent');
 
-    for (var i = opponents.length - 1; i >= 0; i--) {
+    for (let i = opponents.length - 1; i >= 0; i--) {
         if (RectCircleColliding(player_1, opponents[i])) {
             return 'opponent';
         }
     }
 
     // Check collision with obstacles.
-    var obstacles = document.getElementsByTagName('obstacle');
+    const obstacles = document.getElementsByTagName('obstacle');
 
-    for (var i = obstacles.length - 1; i >= 0; i--) {
+    for (let i = obstacles.length - 1; i >= 0; i--) {
         if (RectRectColliding(player_1, obstacles[i])) {
             return 'obstacle';
         }
@@ -370,7 +370,7 @@ function collisionCheck() {
 
 // Generates a new element with the given specifications
 function create(element, left, top, size) {
-    var obstacle = document.createElement(element);
+    let obstacle = document.createElement(element);
     obstacle.style.width = size;
     obstacle.style.height = size;
     obstacle.style.left = left;
@@ -380,8 +380,8 @@ function create(element, left, top, size) {
 
 // Deletes all of the specified element
 function clear(tagName) {
-    var objects = document.getElementsByTagName(tagName);
-    for (var i = objects.length - 1; i >= 0; i--) {
+    const objects = document.getElementsByTagName(tagName);
+    for (let i = objects.length - 1; i >= 0; i--) {
         map.removeChild(objects[i]);
     }
 }
@@ -389,8 +389,8 @@ function clear(tagName) {
 // Checks for collision between two rectangles, giving 3px of padding
 // Based on: https://stackoverflow.com/a/35974082/9637665
 function RectRectColliding(a, b) {
-    var aRect = a.getBoundingClientRect();
-    var bRect = b.getBoundingClientRect();
+    const aRect = a.getBoundingClientRect();
+    const bRect = b.getBoundingClientRect();
 
     aRect.height -= 3;
     aRect.width -= 3;
@@ -406,15 +406,15 @@ function RectRectColliding(a, b) {
 // Checks for collision between a circle and a rectangle.
 // https://stackoverflow.com/a/21096179/9637665
 function RectCircleColliding(r,c){
-    var circle = c.getBoundingClientRect();
-    var rect = r.getBoundingClientRect();
+    const circle = c.getBoundingClientRect();
+    const rect = r.getBoundingClientRect();
 
     circle.radius = (circle.width / 2) - 3;
     circle.x = circle.left + circle.radius;
     circle.y = circle.top + circle.radius;
 
-    var distX = Math.abs(circle.x - rect.left-rect.width/2);
-    var distY = Math.abs(circle.y - rect.top-rect.height/2);
+    const distX = Math.abs(circle.x - rect.left-rect.width/2);
+    const distY = Math.abs(circle.y - rect.top-rect.height/2);
 
     if (distX > (rect.width/2 + circle.radius)) { return false; }
     if (distY > (rect.height/2 + circle.radius)) { return false; }
@@ -422,15 +422,15 @@ function RectCircleColliding(r,c){
     if (distX <= (rect.width/2)) { return true; } 
     if (distY <= (rect.height/2)) { return true; }
 
-    var dx=distX-rect.width/2;
-    var dy=distY-rect.height/2;
+    const dx=distX-rect.width/2;
+    const dy=distY-rect.height/2;
     return (dx*dx+dy*dy<=(circle.radius*circle.radius));
 }
 
 // https://stackoverflow.com/a/48287386.
 function printArr(arr) {
 let str = "";
-  for (let item of arr) {
+  for (const item of arr) {
     if (Array.isArray(item)) str += printArr(item) + '\n';
     else str += item + ", ";
   }
@@ -439,18 +439,18 @@ let str = "";
 
 // Sets the textContent of all objects to a value
 function set(object, value) {
-    var objects = document.getElementsByTagName(object);
+    let objects = document.getElementsByTagName(object);
 
-    for (var i = objects.length - 1; i >= 0; i--) {
+    for (let i = objects.length - 1; i >= 0; i--) {
         objects[i].textContent = value;
     }
 }
 
 // Counts down and then deletes the counter
 function countUp() {
-    var counters = document.getElementsByTagName('COUNTER');
+    let counters = document.getElementsByTagName('COUNTER');
 
-    for (var i = counters.length - 1; i >= 0; i--) {
+    for (let i = counters.length - 1; i >= 0; i--) {
         counters[i].textContent = parseInt(counters[i].textContent) + 1;
     }
 }
